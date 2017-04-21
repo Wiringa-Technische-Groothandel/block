@@ -2,10 +2,8 @@
 
 namespace WTG\Block\Interfaces;
 
-use WTG\Block\Models\Block;
-
 /**
- * Interface BlockInterface
+ * Block interface
  *
  * @package     WTG\Block
  * @subpackage  Interfaces
@@ -13,14 +11,6 @@ use WTG\Block\Models\Block;
  */
 interface BlockInterface
 {
-    /**
-     * Get a block by its tag
-     *
-     * @param  string  $tag
-     * @return Block
-     */
-    public static function getByTag(string $tag): Block;
-
     /**
      * Get the id
      *

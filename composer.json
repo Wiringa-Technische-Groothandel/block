@@ -15,7 +15,6 @@
     "require": {
         "php": ">=7.0",
         "illuminate/support": "5.4.*",
-        "webpatser/laravel-uuid": "2.*",
-        "wtg/catalog": "dev-master"
+        "webpatser/laravel-uuid": "2.*"
     }
 }

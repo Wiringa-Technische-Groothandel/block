@@ -2,9 +2,9 @@
 
 namespace WTG\Block\Providers;
 
-use Faker\Generator;
+use WTG\Block\Models\Block;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
+use WTG\Block\Interfaces\BlockInterface;
 
 /**
  * Block service provider
@@ -32,6 +32,6 @@ class BlockServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(BlockInterface::class, Block::class);
     }
 }
