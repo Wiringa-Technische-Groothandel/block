@@ -1,19 +1,19 @@
 <?php
 
-namespace WTG\Block\Providers;
+namespace WTG\Content\Providers;
 
-use WTG\Block\Models\Block;
+use WTG\Content\Models\Content;
 use Illuminate\Support\ServiceProvider;
-use WTG\Block\Interfaces\BlockInterface;
+use WTG\Content\Interfaces\ContentInterface;
 
 /**
- * Block service provider
+ * Content service provider
  *
- * @package     WTG\Block
+ * @package     WTG\Content
  * @subpackage  Providers
  * @author      Thomas Wiringa <thomas.wiringa@gmail.com>
  */
-class BlockServiceProvider extends ServiceProvider
+class ContentServiceProvider extends ServiceProvider
 {
     /**
      * Boot the application events.
@@ -23,6 +23,10 @@ class BlockServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__.'/../Migrations');
+
+        $this->loadRoutesFrom(__DIR__.'/../routes.php');
+
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'content');
     }
 
     /**
@@ -32,6 +36,6 @@ class BlockServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(BlockInterface::class, Block::class);
+        $this->app->bind(ContentInterface::class, Content::class);
     }
 }

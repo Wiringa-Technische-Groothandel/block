@@ -1,21 +1,25 @@
 <?php
 
-namespace WTG\Block\Models;
+namespace WTG\Content\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use WTG\Block\Interfaces\BlockInterface;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
+use WTG\Content\Interfaces\ContentInterface;
 
 /**
- * Class Block
+ * Content model
  *
- * @package     WTG\Block
+ * @package     WTG\Content
  * @subpackage  Models
  * @author      Thomas Wiringa  <thomas.wiringa@gmail.com>
  */
-class Block extends Model implements BlockInterface
+class Content extends Model implements ContentInterface
 {
+    /**
+     * @var string
+     */
+    protected $table = 'content';
+
     /**
      * @param  Builder  $query
      * @param  bool  $editable
@@ -27,14 +31,25 @@ class Block extends Model implements BlockInterface
     }
 
     /**
+     * @param  Builder  $query
+     * @param  string  $type
+     * @return Builder
+     */
+    public function scopeType(Builder $query, string $type): Builder
+    {
+        return $query->where('type', $type);
+    }
+
+    /**
      * Get a block by its tag
      *
+     * @param  Builder  $query
      * @param  string  $tag
-     * @return Block
+     * @return Builder
      */
-    public static function getByTag(string $tag): Block
+    public function scopeTag(Builder $query, string $tag): Builder
     {
-        return static::where('tag', $tag)->first();
+        return $query->where('tag', $tag);
     }
 
     /**
@@ -134,20 +149,43 @@ class Block extends Model implements BlockInterface
      *
      * @return string
      */
-    public function getContent(): string
+    public function getValue(): string
     {
-        return $this->attributes['content'] ?: "";
+        return $this->attributes['value'] ?: "";
     }
 
     /**
      * Set the block content.
      *
-     * @param  string  $content
+     * @param  string  $value
      * @return $this
      */
-    public function setContent(string $content)
+    public function setValue(string $value)
     {
-        $this->attributes['content'] = $content;
+        $this->attributes['value'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get the content type.
+     *
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->attributes['type'];
+    }
+
+    /**
+     * Set the content type.
+     *
+     * @param  string  $type
+     * @return $this
+     */
+    public function setType(string $type)
+    {
+        $this->attributes['type'] = $type;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 {
-    "name": "wtg/block",
-    "description": "Blocks module (content manager) for WTG/webshop",
+    "name": "wtg/content",
+    "description": "Content module (content manager) for WTG/webshop",
     "authors": [
         {
             "name": "Thomas Wiringa",
@@ -9,7 +9,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "WTG\\Block\\": "src/"
+            "WTG\\Content\\": "src/"
         }
     },
     "require": {

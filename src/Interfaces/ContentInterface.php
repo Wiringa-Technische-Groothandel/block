@@ -1,16 +1,31 @@
 <?php
 
-namespace WTG\Block\Interfaces;
+namespace WTG\Content\Interfaces;
+
+use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Block interface
+ * Content interface.
  *
- * @package     WTG\Block
+ * @package     WTG\Content
  * @subpackage  Interfaces
  * @author      Thomas Wiringa  <thomas.wiringa@gmail.com>
  */
-interface BlockInterface
+interface ContentInterface
 {
+    const TYPE_BLOCK = 'block';
+    const TYPE_PAGE = 'page';
+    const TYPE_CAROUSEL_ITEM = 'carousel-item';
+
+    /**
+     * Get a block by its tag
+     *
+     * @param  Builder  $query
+     * @param  string  $tag
+     * @return Builder
+     */
+    public function scopeTag(Builder $query, string $tag): Builder;
+
     /**
      * Get the id
      *
@@ -72,17 +87,32 @@ interface BlockInterface
     public function setEditable(bool $editable);
 
     /**
-     * Get the block content.
+     * Get the content value.
      *
      * @return string
      */
-    public function getContent(): string;
+    public function getValue(): string;
 
     /**
-     * Set the block content.
+     * Set the content value.
      *
-     * @param  string  $content
+     * @param  string  $value
      * @return $this
      */
-    public function setContent(string $content);
+    public function setValue(string $value);
+
+    /**
+     * Get the content type.
+     *
+     * @return string
+     */
+    public function getType(): string;
+
+    /**
+     * Set the content type.
+     *
+     * @param  string  $type
+     * @return $this
+     */
+    public function setType(string $type);
 }
