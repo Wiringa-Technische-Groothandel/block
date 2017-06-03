@@ -31,8 +31,10 @@ class CreateContentTable extends Migration
         $this->createBlock('info.manufacturers', "Info / Fabrikanten");
         $this->createBlock('admin.product_import', "Admin / Product import", false);
         $this->createBlock('admin.discount_import', "Admin / Korting import", false);
+        $this->createBlock('admin.catalog_footer', "Catalogus footer", false, "Telefoon: (050) 544 55 66  -  E-Mail: verkoop@wiringa.nl  -  Website: wiringa.nl  -  Maart 2017");
 
         $this->createPage('test', 'Custom page title', "<h1>Foobar</h1>");
+
     }
 
     /**
@@ -51,8 +53,9 @@ class CreateContentTable extends Migration
      * @param  string  $tag
      * @param  string  $name
      * @param  bool  $editable
+     * @param  string|null  $value
      */
-    protected function createBlock(string $tag, string $name, bool $editable = true)
+    protected function createBlock(string $tag, string $name, bool $editable = true, $value = null)
     {
         /** @var ContentInterface $content */
         $content = app()->make(ContentInterface::class);
@@ -61,6 +64,11 @@ class CreateContentTable extends Migration
         $content->setName($name);
         $content->setEditable($editable);
         $content->setType(ContentInterface::TYPE_BLOCK);
+
+        if ($value !== null) {
+            $content->setValue($value);
+        }
+
         $content->save();
     }
 
